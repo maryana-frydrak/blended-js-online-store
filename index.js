@@ -1,0 +1,4 @@
+import"./assets/styles-KNfNGCq3.js";import{t as e}from"./assets/vendor-ByiddPBc.js";var t=`https://dummyjson.com/products`,n={CATEGORIES:`/category-list`};e.defaults.baseURL=t;async function r(){let{data:t}=await e(`${n.CATEGORIES}`);return t}var i={categories:document.querySelector(`.categories`)};function a(e){let t=e.map(e=>`<li class="categories__item">
+   <button class="categories__btn" type="button" data-category="${e}">${e}</button>
+ </li>`).join(``);i.categories.innerHTML=t}async function o(){try{a([`all`,...await r()])}catch(e){console.log(e)}}document.addEventListener(`DOMContentLoaded`,o);
+//# sourceMappingURL=index.js.map
