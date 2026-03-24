@@ -14,3 +14,8 @@ export async function getProducts(currentPage) {
   );
   return data;
 }
+
+export async function getProductsByCategory(category) {
+  const { data } = await axios(`${API_ENDPOINTS.BYCATEGORY}${category}`);
+  return data;
+}
