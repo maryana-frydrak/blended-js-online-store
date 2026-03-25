@@ -17,15 +17,20 @@ import {
 } from './render-function';
 
 let currentPage = 1;
+let category = '';
 
 export async function initHomePage() {
   try {
+    currentPage = 1;
     hideNotFound();
     hideloadMoreBtn();
     showloader();
     const categories = await getCategories();
     const allCategories = ['all', ...categories];
     renderCategories(allCategories);
+    document
+      .querySelector('.categories__btn')
+      .classList.add('categories__btn--active');
     const { products, skip, total } = await getProducts(currentPage);
     if (products.length === 0) {
       showNotFound();
@@ -48,14 +53,29 @@ export async function handlerLoadMore() {
     hideNotFound();
     hideloadMoreBtn();
     showloader();
-    const { products, skip, total } = await getProducts(currentPage);
-    if (products.length === 0) {
-      showNotFound();
-      return;
-    }
-    renderProducts(products);
-    if (total - (skip + 12) > 0) {
-      showloadMoreBtn();
+    if (category === '') {
+      const { products, skip, total } = await getProducts(currentPage);
+      if (products.length === 0) {
+        showNotFound();
+        return;
+      }
+      renderProducts(products);
+      if (total - (skip + 12) > 0) {
+        showloadMoreBtn();
+      }
+    } else {
+      const { products, skip, total } = await getProductsByCategory(
+        category,
+        currentPage
+      );
+      if (products.length === 0) {
+        showNotFound();
+        return;
+      }
+      renderProducts(products);
+      if (total - (skip + 12) > 0) {
+        showloadMoreBtn();
+      }
     }
   } catch (error) {
     showToast('Something went wrong, try again, please', 'error');
@@ -66,20 +86,40 @@ export async function handlerLoadMore() {
 
 export async function handlerClickByCategory(e) {
   if (e.target.nodeName !== 'BUTTON') return;
-  const category = e.target.dataset.category;
+  category = e.target.dataset.category;
+  document
+    .querySelectorAll('.categories__btn')
+    .forEach(item => item.classList.remove('categories__btn--active'));
+  e.target.classList.add('categories__btn--active');
   try {
+    currentPage = 1;
     hideNotFound();
     hideloadMoreBtn();
     showloader();
-    const { products } = await getProductsByCategory(category);
-    if (products.length === 0) {
-      showNotFound();
-      return;
-    }
     clearProductList();
-    renderProducts(products);
-    if (total - (skip + 12) > 0) {
-      showloadMoreBtn();
+    if (category === 'all') {
+      const { products, skip, total } = await getProducts(currentPage);
+      if (products.length === 0) {
+        showNotFound();
+        return;
+      }
+      renderProducts(products);
+      if (total - (skip + 12) > 0) {
+        showloadMoreBtn();
+      }
+    } else {
+      const { products, skip, total } = await getProductsByCategory(
+        category,
+        currentPage
+      );
+      if (products.length === 0) {
+        showNotFound();
+        return;
+      }
+      renderProducts(products);
+      if (total - (skip + 12) > 0) {
+        showloadMoreBtn();
+      }
     }
   } catch (error) {
     showToast('Something went wrong, try again, please', 'error');
