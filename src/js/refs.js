@@ -4,4 +4,7 @@ export const refs = {
   loadMoreBtn: document.querySelector('.load-more-btn'),
   loader: document.querySelector('.loader'),
   notFound: document.querySelector('.not-found'),
+  modal: document.querySelector('.modal'),
+  modalCloseBtn: document.querySelector('.modal__close-btn'),
+  modalProduct: document.querySelector('.modal-product'),
 };

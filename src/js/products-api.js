@@ -22,3 +22,10 @@ export async function getProductsByCategory(category, currentPage) {
   );
   return data;
 }
+
+export async function getProductsById(id) {
+  const productId = productCard.dataset.id;
+  const { data } = await axios(`${API_ENDPOINTS.PRODUCTS}${productId}`);
+  return data;
+}
+// https://dummyjson.com/products/1

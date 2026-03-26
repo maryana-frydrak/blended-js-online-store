@@ -1,8 +1,10 @@
 import { showToast } from './helpers';
+import { openModal } from './modal';
 import {
   getCategories,
   getProducts,
   getProductsByCategory,
+  getProductsById,
 } from './products-api';
 import {
   clearProductList,
@@ -125,5 +127,18 @@ export async function handlerClickByCategory(e) {
     showToast('Something went wrong, try again, please', 'error');
   } finally {
     hideloader();
+  }
+}
+
+export async function handlerProductCard(e) {
+  const productCard = e.target.closest('li');
+  if (!productCard) return;
+  try {
+    const response = await getProductsById(id);
+    const productData = await response.json();
+    renderModalContent(productData);
+    openModal;
+  } catch (error) {
+    showToast('Something went wrong, try again, please', 'error');
   }
 }
