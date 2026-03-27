@@ -24,8 +24,15 @@ export async function getProductsByCategory(category, currentPage) {
 }
 
 export async function getProductsById(id) {
-  const productId = productCard.dataset.id;
-  const { data } = await axios(`${API_ENDPOINTS.PRODUCTS}${productId}`);
-  return data;
+  try {
+    const { data } = await axios(`${API_ENDPOINTS.PRODUCTS}/${id}`);
+    console.log(data);
+    return data;
+  } catch (error) {
+    showToast('Помилка при отриманні товару за ID', 'error');
+    throw error;
+  }
 }
+console.log(API_ENDPOINTS);
+getProductsById(1).then(data => console.log('result', data));
 // https://dummyjson.com/products/1

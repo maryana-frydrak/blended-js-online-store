@@ -133,12 +133,22 @@ export async function handlerClickByCategory(e) {
 export async function handlerProductCard(e) {
   const productCard = e.target.closest('li');
   if (!productCard) return;
+  const id = productCard.dataset.id;
+  console.log('find card', productCard);
+  console.log('get id', id);
+  if (!productId) {
+    showToast('Помилка: ID не знайдено в атрибутах data-id!', 'error');
+    return;
+  }
   try {
     const response = await getProductsById(id);
     const productData = await response.json();
+    console.log(productData);
     renderModalContent(productData);
-    openModal;
+    openModal();
   } catch (error) {
     showToast('Something went wrong, try again, please', 'error');
+  } finally {
+    hideloader();
   }
 }
