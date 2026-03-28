@@ -5,14 +5,19 @@ import {
   getProducts,
   getProductsByCategory,
   getProductsById,
+  getProductsByName,
 } from './products-api';
+import { refs } from './refs';
 import {
   clearProductList,
+  getPaginatedData,
+  hideClearBtn,
   hideloader,
   hideloadMoreBtn,
   hideNotFound,
   renderCategories,
   renderProducts,
+  showClearBtn,
   showloader,
   showloadMoreBtn,
   showNotFound,
@@ -133,9 +138,10 @@ export async function handlerClickByCategory(e) {
 export async function handlerProductCard(e) {
   const productCard = e.target.closest('li');
   if (!productCard) return;
+  showloader();
   const id = productCard.dataset.id;
-  console.log('find card', productCard);
-  console.log('get id', id);
+  // console.log('find card', productCard);
+  // console.log('get id', id);
   if (!productId) {
     showToast('Помилка: ID не знайдено в атрибутах data-id!', 'error');
     return;
@@ -143,12 +149,62 @@ export async function handlerProductCard(e) {
   try {
     const response = await getProductsById(id);
     const productData = await response.json();
-    console.log(productData);
+    // console.log(productData);
     renderModalContent(productData);
     openModal();
   } catch (error) {
     showToast('Something went wrong, try again, please', 'error');
   } finally {
     hideloader();
+  }
+}
+
+export async function handlerForm(e) {
+  e.preventDefault();
+  const query = refs.searchInput.value.trim();
+  if (!query) return;
+  showloader();
+  try {
+    const response = await getProductsByName(query);
+    const data = await response.json();
+    if (data.length > 0) {
+      hideNotFound();
+      const dataToRender = getPaginatedData(allProducts, currentPage);
+      clearProductList();
+      renderProducts(dataToRender);
+    } else {
+      clearProductList();
+      showNotFound();
+    }
+  } catch (error) {
+    showToast('Something went wrong, try again, please', 'error');
+  } finally {
+    hideloader();
+  }
+}
+
+export async function handlerFormCloseBtn(e) {
+  showloader();
+  refs.searchInput.value = '';
+  hideClearBtn();
+  hideNotFound();
+  try {
+    const res = await getProducts(currentPage);
+    const products = await res.json();
+    renderProducts(products);
+  } catch (error) {
+    showToast('Something went wrong, try again, please', 'error');
+  } finally {
+    hideloader();
+  }
+}
+
+export function handlerInputCloseBtn(e) {
+  const query = e.target.value.trim();
+
+  if (query.length > 0) {
+    showClearBtn();
+  } else {
+    hideClearBtn();
   }
 }

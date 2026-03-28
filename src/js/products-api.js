@@ -24,15 +24,17 @@ export async function getProductsByCategory(category, currentPage) {
 }
 
 export async function getProductsById(id) {
-  try {
-    const { data } = await axios(`${API_ENDPOINTS.PRODUCTS}/${id}`);
-    console.log(data);
-    return data;
-  } catch (error) {
-    showToast('Помилка при отриманні товару за ID', 'error');
-    throw error;
-  }
+  const { data } = await axios(`${API_ENDPOINTS.BYID}/${id}`);
+  return data;
 }
-console.log(API_ENDPOINTS);
-getProductsById(1).then(data => console.log('result', data));
+// console.log(API_ENDPOINTS);
+// getProductsById(1).then(data => console.log('result', data));
 // https://dummyjson.com/products/1
+export async function getProductsByName(query) {
+  const { data } = await axios(
+    `${API_ENDPOINTS.BYNAME}?q=${query}&limit=${ITEMS_PER_PAGE}`
+  );
+  return data;
+}
+// getProductsByName().then(data => console.log('result', data));
+// https://dummyjson.com/products/search?q=nail

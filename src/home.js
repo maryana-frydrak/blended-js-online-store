@@ -1,6 +1,9 @@
 //Логіка сторінки Home
 import {
   handlerClickByCategory,
+  handlerForm,
+  handlerFormCloseBtn,
+  handlerInputCloseBtn,
   handlerLoadMore,
   handlerProductCard,
   initHomePage,
@@ -12,3 +15,6 @@ document.addEventListener('DOMContentLoaded', initHomePage);
 refs.loadMoreBtn.addEventListener('click', handlerLoadMore);
 refs.categories.addEventListener('click', handlerClickByCategory);
 refs.products.addEventListener('click', handlerProductCard);
+refs.searchForm.addEventListener('submit', handlerForm);
+refs.clearBtn.addEventListener('click', handlerFormCloseBtn);
+refs.searchInput.addEventListener('input', handlerInputCloseBtn);

@@ -33,6 +33,17 @@ export function renderProducts(arr) {
   refs.products.insertAdjacentHTML('beforeend', markup);
 }
 
+export function clearProductList() {
+  refs.products.innerHTML = '';
+}
+
+let currentPage = 1;
+export function getPaginatedData(allProducts, currentPage) {
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  return allProducts.slice(startIndex, endIndex);
+}
+
 export function showloadMoreBtn() {
   refs.loadMoreBtn.classList.remove('is-hidden');
 }
@@ -57,6 +68,10 @@ export function hideNotFound() {
   refs.notFound.classList.remove('not-found--visible');
 }
 
-export function clearProductList() {
-  refs.products.innerHTML = '';
+export function showClearBtn() {
+  refs.clearBtn.classList.add('is-visible');
+}
+
+export function hideClearBtn() {
+  refs.clearBtn.classList.remove('is-visible');
 }
