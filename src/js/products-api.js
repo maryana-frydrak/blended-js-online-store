@@ -28,7 +28,7 @@ export async function getProductsById(id) {
   return data;
 }
 // console.log(API_ENDPOINTS);
-// getProductsById(1).then(data => console.log('result', data));
+// getProductsById(5).then(data => console.log('result', data));
 // https://dummyjson.com/products/1
 export async function getProductsByName(query) {
   const { data } = await axios(

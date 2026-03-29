@@ -1,4 +1,5 @@
 import { refs } from './refs';
+import { cart } from './storage';
 
 export function renderCategories(arr) {
   const markup = arr
@@ -15,9 +16,9 @@ export function renderProducts(arr) {
   const markup = arr
     .map(
       ({
+        id,
         thumbnail,
         title,
-        id,
         brand,
         category,
         price,
@@ -74,4 +75,10 @@ export function showClearBtn() {
 
 export function hideClearBtn() {
   refs.clearBtn.classList.remove('is-visible');
+}
+
+export function updateNavCount() {
+  if (refs.navCountSpan) {
+    refs.navCountSpan.textContent = cart.length;
+  }
 }

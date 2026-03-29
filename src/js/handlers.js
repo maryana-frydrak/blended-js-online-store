@@ -21,7 +21,9 @@ import {
   showloader,
   showloadMoreBtn,
   showNotFound,
+  updateNavCount,
 } from './render-function';
+import { cart } from './storage';
 
 let currentPage = 1;
 let category = '';
@@ -142,7 +144,7 @@ export async function handlerProductCard(e) {
   const id = productCard.dataset.id;
   // console.log('find card', productCard);
   // console.log('get id', id);
-  if (!productId) {
+  if (!id) {
     showToast('Помилка: ID не знайдено в атрибутах data-id!', 'error');
     return;
   }
@@ -207,4 +209,22 @@ export function handlerInputCloseBtn(e) {
   } else {
     hideClearBtn();
   }
+}
+
+export function onBtnCardClick(e) {
+  console.log('клік по кнопці відбувся');
+  const id = e.currentTarget.dataset.id;
+  console.log('staff id', id);
+  const currentIndex = cart.indexOf(id);
+
+  if (currentIndex === -1) {
+    cart.push(id);
+    refs.modalProductBtnCart.textContent = 'Remove from Cart';
+  } else {
+    cart.splice(currentIndex, 1);
+    refs.modalProductBtnCart.textContent = 'Add to Cart';
+  }
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateNavCount();
 }

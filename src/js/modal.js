@@ -1,10 +1,18 @@
 import { refs } from './refs';
+import { handlerModalCartLogic } from './storage';
 
-export function openModal() {
+export function openModal(e) {
   refs.modal.classList.add('modal--is-open');
   refs.body.style.overflow = 'hidden';
 
   window.addEventListener('keydown', onEskKeyPress);
+
+  const card = e.target.closest('products__item');
+  if (!card) return;
+  const productId = card.dataset.id;
+  console.log('Id from card', productId);
+  refs.modalProductBtnCart.dataset.id = productId;
+  handlerModalCartLogic(productId, modalProductBtnCart);
 }
 
 export function closeModal() {

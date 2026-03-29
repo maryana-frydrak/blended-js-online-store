@@ -11,4 +11,6 @@ export const refs = {
   searchForm: document.querySelector('.search-form'),
   searchInput: document.querySelector('.search-form__input'),
   clearBtn: document.querySelector('.search-form__btn-clear'),
+  navCountSpan: document.querySelector('.nav__count'),
+  modalProductBtnCart: document.querySelector('.modal-product__btn--cart'),
 };
