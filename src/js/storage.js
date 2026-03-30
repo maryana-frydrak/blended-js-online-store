@@ -1,5 +1,3 @@
-import { refs } from './refs';
-
 export let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 export function handlerModalCartLogic(productId, modalProductBtnCart) {

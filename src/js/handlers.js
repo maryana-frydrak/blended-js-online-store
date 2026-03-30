@@ -212,9 +212,10 @@ export function handlerInputCloseBtn(e) {
 }
 
 export function onBtnCardClick(e) {
-  console.log('клік по кнопці відбувся');
+  // console.log('клік по кнопці відбувся');
   const id = e.currentTarget.dataset.id;
-  console.log('staff id', id);
+  // console.log('check id', e.currentTarget.dataset.id);
+  // console.log('button', e.currentTarget);
   const currentIndex = cart.indexOf(id);
 
   if (currentIndex === -1) {
