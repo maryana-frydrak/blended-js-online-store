@@ -11,6 +11,10 @@ export const refs = {
   searchForm: document.querySelector('.search-form'),
   searchInput: document.querySelector('.search-form__input'),
   clearBtn: document.querySelector('.search-form__btn-clear'),
-  navCountSpan: document.querySelector('.nav__count'),
+  cartCountSpan: document.querySelector('[data-cart-count]'),
   modalProductBtnCart: document.querySelector('.modal-product__btn--cart'),
+  wishlistCountSpan: document.querySelector('[data-wishlist-count]'),
+  modalProductBtnWishlist: document.querySelector(
+    '.modal-product__btn--wishlist'
+  ),
 };

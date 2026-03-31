@@ -21,9 +21,10 @@ import {
   showloader,
   showloadMoreBtn,
   showNotFound,
-  updateNavCount,
+  updateNavCartCount,
+  updateNavWishlistCount,
 } from './render-function';
-import { cart } from './storage';
+import { cart, wishlist } from './storage';
 
 let currentPage = 1;
 let category = '';
@@ -227,5 +228,24 @@ export function onBtnCardClick(e) {
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
-  updateNavCount();
+  updateNavCartCount();
+}
+
+export function onBtnWishlistClick(e) {
+  // console.log('клік по кнопці відбувся');
+  const id = e.currentTarget.dataset.id;
+  // console.log('check id', e.currentTarget.dataset.id);
+  // console.log('button', e.currentTarget);
+  const index = wishlist.indexOf(id);
+
+  if (index === -1) {
+    wishlist.push(id);
+    refs.modalProductBtnWishlist.textContent = 'Remove from Wishlist';
+  } else {
+    wishlist.splice(index, 1);
+    refs.modalProductBtnWishlist.textContent = 'Add to Wishlist';
+  }
+
+  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  updateNavWishlistCount();
 }

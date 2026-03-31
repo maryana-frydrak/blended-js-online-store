@@ -1,4 +1,6 @@
+import { onBtnCardClick, onBtnWishlistClick } from './handlers';
 import { refs } from './refs';
+import { updateNavCartCount, updateNavWishlistCount } from './render-function';
 import { handlerModalCartLogic } from './storage';
 
 export function openModal(e) {
@@ -17,6 +19,22 @@ export function openModal(e) {
   }
   refs.modalProductBtnCart.dataset.id = productId;
   handlerModalCartLogic(productId, modalProductBtnCart);
+
+  updateNavCartCount();
+  if (isInCart) {
+    refs.modalProductBtnCart.textContent = 'Remove from Cart';
+  } else {
+    refs.modalProductBtnCart.textContent = 'Add to Cart';
+  }
+  refs.modalProductBtnCart.removeEventListener('click', onBtnCardClick);
+
+  updateNavWishlistCount();
+  if (isInWishlist) {
+    refs.modalProductBtnWishlist.textContent = 'Remove from Wishlist';
+  } else {
+    refs.modalProductBtnWishlist.textContent = 'Add to Wishlist';
+  }
+  refs.modalProductBtnWishlist.removeEventListener('click', onBtnWishlistClick);
 }
 
 export function closeModal() {

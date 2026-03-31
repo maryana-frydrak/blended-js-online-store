@@ -1,5 +1,5 @@
 import { refs } from './refs';
-import { cart } from './storage';
+import { cart, wishlist } from './storage';
 
 export function renderCategories(arr) {
   const markup = arr
@@ -77,8 +77,14 @@ export function hideClearBtn() {
   refs.clearBtn.classList.remove('is-visible');
 }
 
-export function updateNavCount() {
-  if (refs.navCountSpan) {
-    refs.navCountSpan.textContent = cart.length;
+export function updateNavCartCount() {
+  if (refs.cartCountSpan) {
+    refs.cartCountSpan.textContent = cart.length;
+  }
+}
+
+export function updateNavWishlistCount() {
+  if (refs.wishlistCountSpan) {
+    refs.wishlistCountSpan.textContent = wishlist.length;
   }
 }

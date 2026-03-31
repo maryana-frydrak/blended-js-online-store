@@ -8,6 +8,7 @@ import {
   handlerProductCard,
   initHomePage,
   onBtnCardClick,
+  onBtnWishlistClick,
 } from './js/handlers.js';
 
 import { refs } from './js/refs.js';
@@ -20,3 +21,4 @@ refs.searchForm.addEventListener('submit', handlerForm);
 refs.clearBtn.addEventListener('click', handlerFormCloseBtn);
 refs.searchInput.addEventListener('input', handlerInputCloseBtn);
 refs.modalProductBtnCart.addEventListener('click', onBtnCardClick);
+refs.modalProductBtnWishlist.addEventListener('click', onBtnWishlistClick);
