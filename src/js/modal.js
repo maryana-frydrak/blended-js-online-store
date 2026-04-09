@@ -4,11 +4,7 @@ import { updateNavCartCount, updateNavWishlistCount } from './render-function';
 import { handlerModalCartLogic } from './storage';
 
 export function openModal(e) {
-  const card = e.target.closest('products__item');
-  if (!card) return;
-  const productId = card.dataset.id;
-  // console.log('Id from card', productId);
-  refs.modal.classList.add('modal--is-open');
+  refs.modal.classList.add('is-open');
   refs.body.style.overflow = 'hidden';
 
   window.addEventListener('keydown', onEskKeyPress);
@@ -38,14 +34,14 @@ export function openModal(e) {
 }
 
 export function closeModal() {
-  refs.modal.classList.remove('modal--is-open');
+  refs.backdrop.classList.remove('is-open');
   refs.body.style.overflow = '';
 
   window.removeEventListener('keydown', onEskKeyPress);
 }
 
 refs.modalCloseBtn.addEventListener('click', closeModal);
-refs.modal.addEventListener('click', e => {
+refs.backdrop.addEventListener('click', e => {
   if (e.target === e.currentTarget) {
     e.stopPropagation();
     closeModal();

@@ -139,12 +139,13 @@ export async function handlerClickByCategory(e) {
 }
 
 export async function handlerProductCard(e) {
+  console.log('click');
   const productCard = e.target.closest('li');
   if (!productCard) return;
   showloader();
   const id = productCard.dataset.id;
-  // console.log('find card', productCard);
-  // console.log('get id', id);
+  console.log('find card', productCard);
+  console.log('get id', id);
   if (!id) {
     showToast('Помилка: ID не знайдено в атрибутах data-id!', 'error');
     return;
