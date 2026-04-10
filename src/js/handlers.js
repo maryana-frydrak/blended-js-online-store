@@ -144,8 +144,8 @@ export async function handlerProductCard(e) {
   if (!productCard) return;
   showloader();
   const id = productCard.dataset.id;
-  console.log('find card', productCard);
-  console.log('get id', id);
+  console.log('Клік по товару, а не по хрестику!');
+  // console.log('get id', id);
   if (!id) {
     showToast('Помилка: ID не знайдено в атрибутах data-id!', 'error');
     return;
