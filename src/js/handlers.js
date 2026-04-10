@@ -1,5 +1,5 @@
 import { showToast } from './helpers';
-import { openModal } from './modal';
+import { openModal, renderModalContent } from './modal';
 import {
   getCategories,
   getProducts,
@@ -139,23 +139,20 @@ export async function handlerClickByCategory(e) {
 }
 
 export async function handlerProductCard(e) {
-  console.log('click');
   const productCard = e.target.closest('li');
   if (!productCard) return;
   showloader();
   const id = productCard.dataset.id;
-  console.log('Клік по товару, а не по хрестику!');
-  // console.log('get id', id);
+
   if (!id) {
     showToast('Помилка: ID не знайдено в атрибутах data-id!', 'error');
     return;
   }
   try {
-    const response = await getProductsById(id);
-    const productData = await response.json();
-    // console.log(productData);
+    const productData = await getProductsById(id);
+
     renderModalContent(productData);
-    openModal();
+    openModal(productData);
   } catch (error) {
     showToast('Something went wrong, try again, please', 'error');
   } finally {

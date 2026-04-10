@@ -18,4 +18,6 @@ export const refs = {
   modalProductBtnWishlist: document.querySelector(
     '.modal-product__btn--wishlist'
   ),
+  scrollBtn: document.querySelector('.scroll-top-btn'),
+  themeBtn: document.querySelector('.theme-toggle-btn'),
 };
