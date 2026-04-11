@@ -1,3 +1,4 @@
+import iziToast from 'izitoast';
 import { showToast } from './helpers';
 import { openModal, renderModalContent } from './modal';
 import {
@@ -24,7 +25,7 @@ import {
   updateNavCartCount,
   updateNavWishlistCount,
 } from './render-function';
-import { cart, wishlist } from './storage';
+import { load, save } from './storage';
 
 let currentPage = 1;
 let category = '';
@@ -211,10 +212,10 @@ export function handlerInputCloseBtn(e) {
 }
 
 export function onBtnCardClick(e) {
-  // console.log('клік по кнопці відбувся');
   const id = e.currentTarget.dataset.id;
-  // console.log('check id', e.currentTarget.dataset.id);
-  // console.log('button', e.currentTarget);
+
+  const cart = load('cart');
+
   const currentIndex = cart.indexOf(id);
 
   if (currentIndex === -1) {
@@ -225,15 +226,16 @@ export function onBtnCardClick(e) {
     refs.modalProductBtnCart.textContent = 'Add to Cart';
   }
 
-  localStorage.setItem('cart', JSON.stringify(cart));
+  save('cart', cart);
+
   updateNavCartCount();
 }
 
 export function onBtnWishlistClick(e) {
-  // console.log('клік по кнопці відбувся');
   const id = e.currentTarget.dataset.id;
-  // console.log('check id', e.currentTarget.dataset.id);
-  // console.log('button', e.currentTarget);
+
+  const wishlist = load('wishlist');
+
   const index = wishlist.indexOf(id);
 
   if (index === -1) {
@@ -244,6 +246,20 @@ export function onBtnWishlistClick(e) {
     refs.modalProductBtnWishlist.textContent = 'Add to Wishlist';
   }
 
-  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  save('wishlist', wishlist);
+
   updateNavWishlistCount();
+}
+
+export function onBuyBtnClick() {
+  save('cart', []);
+
+  updateNavCartCount();
+
+  iziToast.success({
+    title: 'Success',
+    message: 'Products purchased successfully!',
+  });
+
+  renderCartPage([]); //очищуємо сторінку або рендеримо
 }

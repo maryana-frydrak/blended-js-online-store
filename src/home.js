@@ -35,19 +35,6 @@ refs.scrollBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// const savedTheme = localStorage.getItem('theme');
-// if (savedTheme === 'dark') {
-//   document.body.classList.add('dark-theme');
-//   refs.themeBtn.textContent = '🌛';
-// } else {
-//   refs.themeBtn.textContent = '🌞';
-// }
-// refs.themeBtn.addEventListener('click', () => {
-//   document.body.classList.toggle('dark-theme');
-//   const isDark = document.body.classList.contains('dark-theme');
-//   localStorage.setItem('theme', isDark ? 'dark' : 'light');
-//   refs.themeBtn.textContent = isDark ? '🌛' : '🌞';
-// });
 refs.themeBtn.addEventListener('click', () => {
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';

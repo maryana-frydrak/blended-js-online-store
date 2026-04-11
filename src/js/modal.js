@@ -1,7 +1,8 @@
+import { STORAGE_KEYS } from './constants';
 import { onBtnCardClick, onBtnWishlistClick } from './handlers';
 import { refs } from './refs';
 import { updateNavCartCount, updateNavWishlistCount } from './render-function';
-import { handlerModalCartLogic } from './storage';
+import { isInStorage } from './storage';
 
 export function openModal(productData) {
   refs.backdrop.classList.add('is-open');
@@ -10,7 +11,10 @@ export function openModal(productData) {
   const productId = productData._id || productData.id;
 
   refs.modalProductBtnCart.dataset.id = productId;
+  refs.modalProductBtnWishlist.dataset.id = productId;
+
   handlerModalCartLogic(productId, refs.modalProductBtnCart);
+  handlerModalWishlistLogic(productId, refs.modalProductBtnWishlist);
 
   window.addEventListener('keydown', onEskKeyPress);
   const addToCartBtn = refs.modalProductBtnCart;
@@ -28,6 +32,7 @@ export function openModal(productData) {
     refs.modalProductBtnCart.textContent = 'Add to Cart';
   }
   refs.modalProductBtnCart.removeEventListener('click', onBtnCardClick);
+  refs.modalProductBtnCart.addEventListener('click', onBtnCardClick);
 
   updateNavWishlistCount();
   const isInWishlist = checkIsItemInWishlist(productId);
@@ -38,6 +43,7 @@ export function openModal(productData) {
     refs.modalProductBtnWishlist.textContent = 'Add to Wishlist';
   }
   refs.modalProductBtnWishlist.removeEventListener('click', onBtnWishlistClick);
+  refs.modalProductBtnWishlist.addEventListener('click', onBtnWishlistClick);
 }
 
 export function closeModal() {
@@ -86,4 +92,31 @@ export function renderModalContent(product) {
       </div>`;
 
   refs.modalProduct.innerHTML = markup;
+}
+
+export function handlerModalCartLogic(productId, modalProductBtnCart) {
+  if (!modalProductBtnCart) return;
+
+  const isInCart = isInStorage(STORAGE_KEYS.CART, productId);
+
+  modalProductBtnCart.textContent = isInCart
+    ? 'Remove from Cart'
+    : 'Add to Cart';
+
+  if (isInCart) {
+    modalProductBtnCart.classList.add('is-active');
+  } else {
+    modalProductBtnCart.classList.remove('is-active');
+  }
+}
+
+export function handlerModalWishlistLogic(productId, modalProductBtnWishlist) {
+  if (!modalProductBtnWishlist) return;
+
+  const isInWishlist = isInStorage(STORAGE_KEYS.WISHLIST, productId);
+  modalProductBtnWishlist.textContent = isInWishlist
+    ? 'Remove from Wishlist'
+    : 'Add to Wishlist';
+
+  modalProductBtnWishlist.classList.toggle('is-favorite', isInWishlist);
 }

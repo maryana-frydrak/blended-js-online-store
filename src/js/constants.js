@@ -6,4 +6,10 @@ export const API_ENDPOINTS = {
   BYID: '/products',
   BYNAME: '/products/search',
 };
+
 export const ITEMS_PER_PAGE = 12;
+
+export const STORAGE_KEYS = {
+  CART: 'cart',
+  WISHLIST: 'wishlist',
+};

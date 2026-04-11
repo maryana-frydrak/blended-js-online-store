@@ -1,5 +1,7 @@
+import { STORAGE_KEYS } from './constants';
+import { getProductsById } from './products-api';
 import { refs } from './refs';
-import { cart, wishlist } from './storage';
+import { load } from './storage';
 
 export function renderCategories(arr) {
   const markup = arr
@@ -79,12 +81,38 @@ export function hideClearBtn() {
 
 export function updateNavCartCount() {
   if (refs.cartCountSpan) {
+    const cart = load(STORAGE_KEYS.CART);
     refs.cartCountSpan.textContent = cart.length;
   }
 }
 
 export function updateNavWishlistCount() {
   if (refs.wishlistCountSpan) {
+    const wishlist = load(STORAGE_KEYS.WISHLIST);
     refs.wishlistCountSpan.textContent = wishlist.length;
+  }
+}
+
+export async function loadPageData(storageKey) {
+  const ids = load(storageKey);
+
+  if (ids.length === 0) {
+    return;
+  }
+
+  try {
+    showloader();
+
+    const products = await Promise.all(ids.map(id => getProductsById(id)));
+
+    renderProducts(products);
+
+    if (storageKey === 'cart') {
+      calculateTotals(products);
+    }
+  } catch (error) {
+    showToast('Something went wrong, try again, please', 'error');
+  } finally {
+    hideloader();
   }
 }
