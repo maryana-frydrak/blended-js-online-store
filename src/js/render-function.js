@@ -1,3 +1,4 @@
+import { calculateTotals } from '../cart';
 import { STORAGE_KEYS } from './constants';
 import { getProductsById } from './products-api';
 import { refs } from './refs';
@@ -15,6 +16,12 @@ export function renderCategories(arr) {
 }
 
 export function renderProducts(arr) {
+  clearProductList();
+
+  if (arr.length === 0) {
+    return;
+  }
+
   const markup = arr
     .map(
       ({
@@ -97,6 +104,9 @@ export async function loadPageData(storageKey) {
   const ids = load(storageKey);
 
   if (ids.length === 0) {
+    renderProducts([]);
+    if (storageKey === 'cart') calculateTotals([]);
+    hideClearBtn();
     return;
   }
 

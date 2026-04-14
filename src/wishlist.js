@@ -1,13 +1,17 @@
-import { updateNavWishlistCount } from './js/render-function';
-import { wishlist } from './js/storage';
+import { loadPageData, updateNavWishlistCount } from './js/render-function';
+import { load, save, wishlist } from './js/storage';
 
 //Логіка сторінки Wishlist
-export function remoweFromWishlist(productId) {
-  wishlist = wishlist.filter(id => id !== productId);
-  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+export async function remoweFromWishlist(productId) {
+  const currentWishlist = load('wishlist') || [];
+
+  const updatedWishlist = currentWishlist.filter(
+    id => String(id) !== String(productId)
+  );
+
+  save('wishlist', updatedWishlist);
+
   updateNavWishlistCount();
-  const productCard = document.querySelector(`[data-id="${id}"]`);
-  if (productCard) {
-    productCard.remove();
-  }
+
+  await loadPageData('wishlist');
 }

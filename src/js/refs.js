@@ -20,4 +20,7 @@ export const refs = {
   ),
   scrollBtn: document.querySelector('.scroll-top-btn'),
   themeBtn: document.querySelector('.theme-toggle-btn'),
+  itemsCount: document.querySelector('.cart-summary__item [data-count]'),
+  totalPrice: document.querySelector('.cart-summary__item [data-price]'),
+  buyBtn: document.querySelector('.cart-summary__btn'),
 };
