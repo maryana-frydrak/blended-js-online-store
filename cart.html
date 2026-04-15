@@ -1,12 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/blended-js-online-store/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cart</title>
-    <script type="module" crossorigin src="/blended-js-online-store/assets/styles-B4CkEaEC.js"></script>
-    <link rel="stylesheet" crossorigin href="/blended-js-online-store/assets/styles-CkjU4Xe3.css">
+    <script type="module" crossorigin src="/blended-js-online-store/assets/rolldown-runtime-Cq0jCQ29.js"></script>
+    <script type="module" crossorigin src="/blended-js-online-store/assets/vendor-D789xMJy.js"></script>
+    <script type="module" crossorigin src="/blended-js-online-store/assets/render-function-BdPclsFw.js"></script>
+    <link rel="stylesheet" crossorigin href="/blended-js-online-store/assets/render-function-3M_kLx12.css">
   </head>
   <body>
     <header class="header">
@@ -55,7 +57,7 @@
         </li>
       </ul>
     </nav>
-    <button class="theme-toggle-btn" aria-label="Toggle theme"></button>
+    <button class="theme-toggle-btn" aria-label="Toggle theme">🌞</button>
   </div>
 </header>
 
@@ -89,6 +91,29 @@
           <button class="scroll-top-btn" aria-label="Scroll to top">
             &#8679;
           </button>
+          <div class="backdrop">
+  <div class="modal__content">
+    <button class="modal__close-btn" type="button"></button>
+    <div class="modal-product"></div>
+    <div class="modal-product__actions">
+      <button
+        class="modal-product__btn modal-product__btn--wishlist"
+        type="button"
+        data-id=""
+      >
+        Add to Wishlist
+      </button>
+      <button
+        class="modal-product__btn modal-product__btn--cart"
+        type="button"
+        data-id=""
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
+
         </main>
 
         <aside class="sidebar">
@@ -121,27 +146,5 @@
         </aside>
       </div>
     </section>
-    <div class="modal modal--is-open">
-  <div class="modal__content">
-    <button class="modal__close-btn" type="button"></button>
-    <div class="modal-product"></div>
-    <div class="modal-product__actions">
-      <button
-        class="modal-product__btn modal-product__btn--wishlist"
-        type="button"
-      >
-        Add to Wishlist
-      </button>
-      <button
-        class="modal-product__btn modal-product__btn--cart"
-        type="button"
-        data-id=""
-      >
-        Add to Cart
-      </button>
-    </div>
-  </div>
-</div>
-
   </body>
 </html>

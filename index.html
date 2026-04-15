@@ -7,9 +7,9 @@
     <title>Home page</title>
     <script type="module" crossorigin src="/blended-js-online-store/index.js"></script>
     <link rel="modulepreload" crossorigin href="/blended-js-online-store/assets/rolldown-runtime-Cq0jCQ29.js">
-    <link rel="modulepreload" crossorigin href="/blended-js-online-store/assets/styles-B4CkEaEC.js">
     <link rel="modulepreload" crossorigin href="/blended-js-online-store/assets/vendor-D789xMJy.js">
-    <link rel="stylesheet" crossorigin href="/blended-js-online-store/assets/styles-CkjU4Xe3.css">
+    <link rel="modulepreload" crossorigin href="/blended-js-online-store/assets/render-function-BdPclsFw.js">
+    <link rel="stylesheet" crossorigin href="/blended-js-online-store/assets/render-function-3M_kLx12.css">
   </head>
   <body>
     <header class="header">
@@ -58,7 +58,7 @@
         </li>
       </ul>
     </nav>
-    <button class="theme-toggle-btn" aria-label="Toggle theme"></button>
+    <button class="theme-toggle-btn" aria-label="Toggle theme">🌞</button>
   </div>
 </header>
 
@@ -69,8 +69,8 @@
           <ul class="categories"></ul>
           <ul class="products"></ul>
           <button class="load-more-btn is-hidden">Load More</button>
-          <span class="loader is-hidden">Loading...</span>
-          <div class="not-found not-found--visible">
+          <span class="loader is-hidden"></span>
+          <div class="not-found">
             <div class="not-found__icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -93,13 +93,12 @@
               different keywords.
             </p>
           </div>
-          <button class="scroll-top-btn" aria-label="Scroll to top">
+          <button class="scroll-top-btn is-hidden" aria-label="Scroll to top">
             &#8679;
           </button>
         </div>
       </section>
-    </main>
-    <div class="modal modal--is-open">
+      <div class="backdrop">
   <div class="modal__content">
     <button class="modal__close-btn" type="button"></button>
     <div class="modal-product"></div>
@@ -107,6 +106,7 @@
       <button
         class="modal-product__btn modal-product__btn--wishlist"
         type="button"
+        data-id=""
       >
         Add to Wishlist
       </button>
@@ -121,5 +121,6 @@
   </div>
 </div>
 
+    </main>
   </body>
 </html>

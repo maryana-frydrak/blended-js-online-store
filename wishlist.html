@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,8 +9,11 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css"
     />
-    <script type="module" crossorigin src="/blended-js-online-store/assets/styles-B4CkEaEC.js"></script>
-    <link rel="stylesheet" crossorigin href="/blended-js-online-store/assets/styles-CkjU4Xe3.css">
+    <script type="module" crossorigin src="/blended-js-online-store/wishlist.js"></script>
+    <link rel="modulepreload" crossorigin href="/blended-js-online-store/assets/rolldown-runtime-Cq0jCQ29.js">
+    <link rel="modulepreload" crossorigin href="/blended-js-online-store/assets/vendor-D789xMJy.js">
+    <link rel="modulepreload" crossorigin href="/blended-js-online-store/assets/render-function-BdPclsFw.js">
+    <link rel="stylesheet" crossorigin href="/blended-js-online-store/assets/render-function-3M_kLx12.css">
   </head>
   <body>
     <header class="header">
@@ -59,7 +62,7 @@
         </li>
       </ul>
     </nav>
-    <button class="theme-toggle-btn" aria-label="Toggle theme"></button>
+    <button class="theme-toggle-btn" aria-label="Toggle theme">🌞</button>
   </div>
 </header>
 
@@ -96,8 +99,7 @@
           </button>
         </div>
       </section>
-    </main>
-    <div class="modal modal--is-open">
+      <div class="backdrop">
   <div class="modal__content">
     <button class="modal__close-btn" type="button"></button>
     <div class="modal-product"></div>
@@ -105,6 +107,7 @@
       <button
         class="modal-product__btn modal-product__btn--wishlist"
         type="button"
+        data-id=""
       >
         Add to Wishlist
       </button>
@@ -119,5 +122,6 @@
   </div>
 </div>
 
+    </main>
   </body>
 </html>
