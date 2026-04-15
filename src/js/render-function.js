@@ -55,19 +55,27 @@ export function getPaginatedData(allProducts, currentPage) {
 }
 
 export function showloadMoreBtn() {
-  refs.loadMoreBtn.classList.remove('is-hidden');
+  if (refs.loadMoreBtn) {
+    refs.loadMoreBtn.classList.remove('is-hidden');
+  }
 }
 
 export function hideloadMoreBtn() {
-  refs.loadMoreBtn.classList.add('is-hidden');
+  if (refs.loadMoreBtn) {
+    refs.loadMoreBtn.classList.add('is-hidden');
+  }
 }
 
 export function showloader() {
-  refs.loader.classList.remove('is-hidden');
+  if (refs.loader) {
+    refs.loader.classList.remove('is-hidden');
+  }
 }
 
 export function hideloader() {
-  refs.loader.classList.add('is-hidden');
+  if (refs.loader) {
+    refs.loader.classList.add('is-hidden');
+  }
 }
 
 export function showNotFound() {

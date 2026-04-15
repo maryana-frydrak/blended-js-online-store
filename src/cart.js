@@ -1,14 +1,15 @@
-console.log('file of script');
 import { showToast } from './js/helpers';
 import { refs } from './js/refs';
 import { loadPageData, updateNavCartCount } from './js/render-function';
 import { load, save } from './js/storage';
 
 //Логіка сторінки Cart
-export async function remoweFromCart(productId) {
+export async function removeFromCart(productId) {
   const currentCart = load('cart') || [];
 
-  const updatedCart = currentCart.filter(id => id !== productId);
+  const updatedCart = currentCart.filter(
+    id => Number(id) !== Number(productId)
+  );
 
   save('cart', updatedCart);
 
@@ -34,9 +35,8 @@ export function calculateTotals(products) {
 }
 
 export function handleBuyProducts() {
-  alert('click btn');
   const cartData = JSON.parse(localStorage.getItem('cart')) || [];
-  console.log('data from', cartData);
+
   if (cartData.length === 0) {
     showToast('Your cart is empty!', 'warning');
     return;
@@ -51,3 +51,9 @@ export function handleBuyProducts() {
     window.location.reload();
   }, 2000);
 }
+
+if (refs.buyBtn) {
+  refs.buyBtn.addEventListener('click', handleBuyProducts);
+}
+
+loadPageData('cart');

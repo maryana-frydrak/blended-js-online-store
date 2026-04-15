@@ -1,6 +1,4 @@
 //Логіка сторінки Home
-// alert('Works');
-// console.error('it`s a test');
 import { handleBuyProducts } from './cart.js';
 import {
   handlerClickByCategory,
@@ -47,14 +45,6 @@ refs.themeBtn.addEventListener('click', () => {
   localStorage.setItem('theme', newTheme);
 });
 
-// refs.buyBtn?.addEventListener('click', () => {
-//   console.log('click');
-//   alert('fixed click');
-// });
-document.body.addEventListener('click', e => {
-  const btn = e.target.closest('.cart-summary__btn');
-  if (btn) {
-    console.log('click');
-    handleBuyProducts();
-  }
-});
+if (refs.buyBtn) {
+  refs.buyBtn.addEventListener('click', handleBuyProducts);
+}

@@ -17,11 +17,6 @@ export function openModal(productData) {
   handlerModalWishlistLogic(productId, refs.modalProductBtnWishlist);
 
   window.addEventListener('keydown', onEskKeyPress);
-  const addToCartBtn = refs.modalProductBtnCart;
-  if (addToCartBtn) {
-    addToCartBtn.dataset.id = productId;
-    // console.log('Sucses add id to btn', id);
-  }
 
   updateNavCartCount();
   const isInCart = checkIsItemInCart(productId);
@@ -97,7 +92,7 @@ export function renderModalContent(product) {
 export function handlerModalCartLogic(productId, modalProductBtnCart) {
   if (!modalProductBtnCart) return;
 
-  const isInCart = isInStorage(STORAGE_KEYS.CART, productId);
+  const isInCart = isInStorage(STORAGE_KEYS.CART, String(productId));
 
   modalProductBtnCart.textContent = isInCart
     ? 'Remove from Cart'
@@ -113,7 +108,8 @@ export function handlerModalCartLogic(productId, modalProductBtnCart) {
 export function handlerModalWishlistLogic(productId, modalProductBtnWishlist) {
   if (!modalProductBtnWishlist) return;
 
-  const isInWishlist = isInStorage(STORAGE_KEYS.WISHLIST, productId);
+  const isInWishlist = isInStorage(STORAGE_KEYS.WISHLIST, String(productId));
+
   modalProductBtnWishlist.textContent = isInWishlist
     ? 'Remove from Wishlist'
     : 'Add to Wishlist';

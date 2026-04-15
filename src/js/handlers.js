@@ -16,6 +16,7 @@ import {
   hideloader,
   hideloadMoreBtn,
   hideNotFound,
+  loadPageData,
   renderCategories,
   renderProducts,
   showClearBtn,
@@ -213,53 +214,46 @@ export function handlerInputCloseBtn(e) {
 
 export function onBtnCardClick(e) {
   const id = e.currentTarget.dataset.id;
+  if (!id) return;
 
-  const cart = load('cart');
+  const cart = load('cart') || [];
+
+  const cleanCart = cart.filter(item => item !== null);
 
   const currentIndex = cart.indexOf(id);
 
   if (currentIndex === -1) {
-    cart.push(id);
+    cleanCart.push(id);
     refs.modalProductBtnCart.textContent = 'Remove from Cart';
   } else {
-    cart.splice(currentIndex, 1);
+    cleanCart.splice(currentIndex, 1);
     refs.modalProductBtnCart.textContent = 'Add to Cart';
   }
 
-  save('cart', cart);
+  save('cart', cleanCart);
 
   updateNavCartCount();
 }
 
 export function onBtnWishlistClick(e) {
   const id = e.currentTarget.dataset.id;
+  if (!id) return;
 
-  const wishlist = load('wishlist');
+  const wishlist = load('wishlist') || [];
 
-  const index = wishlist.indexOf(id);
+  const cleanWishlist = wishlist.filter(item => item !== null);
 
-  if (index === -1) {
-    wishlist.push(id);
+  const currentindex = cleanWishlist.indexOf(id);
+
+  if (currentindex === -1) {
+    cleanWishlist.push(id);
     refs.modalProductBtnWishlist.textContent = 'Remove from Wishlist';
   } else {
-    wishlist.splice(index, 1);
+    cleanWishlist.splice(currentindex, 1);
     refs.modalProductBtnWishlist.textContent = 'Add to Wishlist';
   }
 
-  save('wishlist', wishlist);
+  save('wishlist', cleanWishlist);
 
   updateNavWishlistCount();
-}
-
-export function onBuyBtnClick() {
-  save('cart', []);
-
-  updateNavCartCount();
-
-  iziToast.success({
-    title: 'Success',
-    message: 'Products purchased successfully!',
-  });
-
-  renderCartPage([]); //очищуємо сторінку або рендеримо
 }
